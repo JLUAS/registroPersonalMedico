@@ -3,6 +3,11 @@ export interface UserLogin{
   password: string
 }
 
+export interface AuthenticateUser{
+  email: string
+  authCode: string
+}
+
 export interface UserRegister{
   email: string
   password: string

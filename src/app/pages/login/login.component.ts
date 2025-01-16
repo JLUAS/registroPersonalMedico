@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UserLogin } from '../../models/User';
 import { UsersService } from '../../services/users.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import { UsersService } from '../../services/users.service';
 })
 export class LoginComponent {
 
-  constructor(private usersService:UsersService){}
+  constructor(private usersService:UsersService, private router: Router){}
 
   user:UserLogin = {email:'', password:''}
   errMessage:string = ""
@@ -37,11 +38,17 @@ export class LoginComponent {
           (res: any) => {
             this.isLoading = false
             localStorage.setItem('token', res.token)
+            console.log(res.token)
+            localStorage.setItem('rol', res.rol)
+            console.log(res.rol)
             localStorage.setItem('email', this.user.email)
+            if(res.rol== "admin")this.router.navigate(['/dashboard'])
+            if(res.rol=="user")this.router.navigate(['/registrar'])
           },
           (err) => {
             this.isLoading = false
             this.errPassword= false
+            this.errGeneral= true
             this.errMessage = 'Error al iniciar sesión'
             console.error(err)
           }

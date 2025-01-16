@@ -8,12 +8,19 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './components/register/register.component';
+import { UsersService } from './services/users.service';
+import { AuthGuardService } from './services/auth-guard.service';
+import { NavComponent } from './components/admin/nav/nav.component';
+import { HomeComponent } from './pages/admin/home/home.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    NavComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +30,9 @@ import { RegisterComponent } from './components/register/register.component';
     HttpClientModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    UsersService,
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })
