@@ -10,7 +10,7 @@ import { AuthenticateUser, UserLogin, UserRegister } from '../models/User';
 export class UsersService {
 
   // private apiUrl = 'http://localhost:3030';
-  private apiUrl = 'http://humorous-oryx-ace.ngrok-free.app';
+  private apiUrl = 'https://humorous-oryx-ace.ngrok-free.app';
 
   constructor(private http: HttpClient) { }
 
