@@ -12,7 +12,8 @@ import { UsersService } from './services/users.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { NavComponent } from './components/admin/nav/nav.component';
 import { HomeComponent } from './pages/admin/home/home.component';
-
+import { HomeComponentUser } from './pages/user/home/home.component';
+import { AuthGuardUserService } from './services/auth-guard-user.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HomeComponent } from './pages/admin/home/home.component';
     LoginComponent,
     RegisterComponent,
     NavComponent,
-    HomeComponent
+    HomeComponent,
+    HomeComponentUser
   ],
   imports: [
     BrowserModule,
@@ -32,7 +34,8 @@ import { HomeComponent } from './pages/admin/home/home.component';
   providers: [
     provideClientHydration(),
     UsersService,
-    AuthGuardService
+    AuthGuardService,
+    AuthGuardUserService
   ],
   bootstrap: [AppComponent]
 })

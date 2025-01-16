@@ -10,7 +10,7 @@ export class AuthGuardUserService implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean|UrlTree {
         if (!this.userService.hasTokenUser()) {
             alert('You are not allowed to view this page. You are redirected to login Page');
-            this.router.navigate(["/login"],{ queryParams: { retUrl: route.url} });
+            this.router.navigate(["/"],{ queryParams: { retUrl: route.url} });
             return false;
         }
         return true;

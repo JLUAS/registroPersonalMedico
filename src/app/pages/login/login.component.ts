@@ -38,12 +38,11 @@ export class LoginComponent {
           (res: any) => {
             this.isLoading = false
             localStorage.setItem('token', res.token)
-            console.log(res.token)
             localStorage.setItem('rol', res.rol)
-            console.log(res.rol)
+            console.log("rol",res.rol)
             localStorage.setItem('email', this.user.email)
             if(res.rol== "admin")this.router.navigate(['/dashboard'])
-            if(res.rol=="user")this.router.navigate(['/registrar'])
+            if(res.rol=="user")this.router.navigate(['/dashboard/health'])
           },
           (err) => {
             this.isLoading = false

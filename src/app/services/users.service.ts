@@ -31,7 +31,6 @@ export class UsersService {
   hasTokenUser(): boolean {
     const token = localStorage.getItem('token');
     if (!token) return false;
-
     try {
       const rol = localStorage.getItem('rol');
       console.log("rol usersService",  rol)
