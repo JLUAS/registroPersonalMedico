@@ -14,6 +14,10 @@ import { NavComponent } from './components/admin/nav/nav.component';
 import { HomeComponent } from './pages/admin/home/home.component';
 import { HomeComponentUser } from './pages/user/home/home.component';
 import { AuthGuardUserService } from './services/auth-guard-user.service';
+import { UserNavComponent } from './components/user/user-nav/user-nav.component';
+import {MatIconModule} from '@angular/material/icon';
+import { UsersComponent } from './pages/admin/users/users.component'
+
 
 @NgModule({
   declarations: [
@@ -22,14 +26,17 @@ import { AuthGuardUserService } from './services/auth-guard-user.service';
     RegisterComponent,
     NavComponent,
     HomeComponent,
-    HomeComponentUser
+    HomeComponentUser,
+    UserNavComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatIconModule
   ],
   providers: [
     provideClientHydration(),

@@ -2,7 +2,7 @@
   <section class="flex items-center justify-center">
     <div class="mx-auto bg-bone2 py-5 px-10 rounded-md">
       <form class="flex flex-col">
-        <h2 class="text-black text-2xl text-center font-light italic">Registro y control de personal medico</h2>
+        <h2 class="text-black text-2xl text-center font-light italic">Registrar usuario</h2>
 
         <div class="px-5 py-3 mx-auto flex flex-col w-full">
           <label class="font-bold text-xl" for="email">Correo electronico</label>
@@ -19,15 +19,15 @@
           <select class="border-2 border-eblack rounded-md p-2 mt-2 focus:outline-none focus:border-orangeHover" [(ngModel)]="user.rol" name="role" id="role" required>
             <option value="" disabled selected>Selecciona un rol</option>
             <option value="admin">Administrador</option>
-            <option value="health">Personal de la salud</option>
+            <option value="user">Personal de la salud</option>
           </select>
         </div>
 
         <div class="px-5 py-3 pb-5 mx-auto flex flex-col w-full">
           <label class="font-bold text-xl" for="password">Contraseña</label>
-          <div class="flex flex-row justify-between w-full">
+          <div class="flex flex-row justify-between w-full items-center">
             <input class="border-2 w-4/5 border-eblack rounded-md p-2 mt-2 focus:outline-none focus:border-orangeHover" [type]="passwordToggle" placeholder="Contraseña" [(ngModel)]="user.password" name="password" id="password" required autocomplete>
-            <button class="mx-auto w-1/5" type="button" (click)="togglePassword()">T</button>
+            <mat-icon class="mx-auto w-1/5"  (click)="togglePassword()">{{visibility}}</mat-icon>
           </div>
           <p class="text-red-700 text-sm" *ngIf="errPassword">{{errMessage}}</p>
         </div>

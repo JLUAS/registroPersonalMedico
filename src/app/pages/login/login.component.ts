@@ -17,13 +17,16 @@ export class LoginComponent {
   errPassword:boolean = false
   errGeneral:boolean = false
   isLoading:boolean = false
+  visibility:string="visibility_off"
   passwordToggle:string = "password"
 
   togglePassword(){
     if(this.passwordToggle == "password"){
       this.passwordToggle = "text"
+      this.visibility="visibility"
     }else{
       this.passwordToggle= "password"
+      this.visibility="visibility_off"
     }
   }
 
@@ -39,7 +42,6 @@ export class LoginComponent {
             this.isLoading = false
             localStorage.setItem('token', res.token)
             localStorage.setItem('rol', res.rol)
-            console.log("rol",res.rol)
             localStorage.setItem('email', this.user.email)
             if(res.rol== "admin")this.router.navigate(['/dashboard'])
             if(res.rol=="user")this.router.navigate(['/dashboard/health'])

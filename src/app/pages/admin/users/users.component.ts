@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from '../../../services/users.service';
 import { AuthenticateUser } from '../../../models/User';
+import { UsersService } from '../../../services/users.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  selector: 'app-users',
+  templateUrl: './users.component.html',
+  styleUrl: './users.component.css'
 })
-export class HomeComponent implements OnInit{
+export class UsersComponent implements OnInit{
   constructor(private usersService: UsersService){ }
   authenticateUser:AuthenticateUser= {email:'', authCode:''}
   isAuth:boolean=false
@@ -29,32 +29,11 @@ export class HomeComponent implements OnInit{
         }
       },
       (err) => {
-        console.log("ENTRO")
         console.error(err)
       }
     )
     setTimeout(() => {
-      this.isTimeoutPassed = true;
-    }, 500);
-  }
-  authenticateUserFun(){
-    const storedEmail = localStorage.getItem('email');
-    if (storedEmail) {
-      this.authenticateUser.email = storedEmail;
-    }
-    this.usersService.authenticateUser(this.authenticateUser).subscribe(
-      (res: any) => {
-        console.log(res.isAuthenticated)
-        if (res.isAuthenticated) {
-          this.isAuth = true;
-        } else {
-          this.isAuth = false;
-        }
-      },
-      (err) => {
-        this.errMessage="Codigo incorrecto"
-        console.error(err)
-      }
-    )
+      if(!this.isAuth)this.isTimeoutPassed = false;
+    }, 100);
   }
 }

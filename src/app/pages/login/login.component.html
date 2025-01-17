@@ -1,4 +1,4 @@
-<div class="bg-eblack">
+<div class="bg-orange">
   <section class="flex items-center justify-center h-screen">
     <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 mx-auto bg-bone2 py-5 px-10 rounded-md">
       <form class="flex flex-col">
@@ -10,9 +10,9 @@
         </div>
         <div class="px-5 pb-5 mx-auto flex flex-col w-full">
           <label class="font-bold text-xl" for="password">Contraseña</label>
-            <div class="flex flex-row justify-between w-full">
+            <div class="flex flex-row justify-between w-full align-middle items-center">
               <input class="border-2 w-4/5 border-eblack rounded-md p-2 mt-2 focus:outline-none focus:border-orangeHover focus:text-orangeHover"  [type]=passwordToggle placeholder="Contraseña" [(ngModel)]="user.password" name="password" id="password" required autocomplete>
-              <button class="mx-auto w-1/5" (click)="togglePassword()">T</button>
+              <mat-icon class="mx-auto w-1/5" (click)="togglePassword()">{{visibility}}</mat-icon>
             </div>
             <p class="text-red-700 text-sm" *ngIf="errPassword">{{errMessage}}</p>
         </div>

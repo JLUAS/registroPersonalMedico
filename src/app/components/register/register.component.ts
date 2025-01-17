@@ -18,12 +18,14 @@ export class RegisterComponent {
   errGeneral: boolean = false;
   isLoading: boolean = false;
   passwordToggle: string = "password";
-
-  togglePassword() {
-    if (this.passwordToggle == "password") {
-      this.passwordToggle = "text";
-    } else {
-      this.passwordToggle = "password";
+  visibility:string="visibility_off"
+  togglePassword(){
+    if(this.passwordToggle == "password"){
+      this.passwordToggle = "text"
+      this.visibility="visibility"
+    }else{
+      this.passwordToggle= "password"
+      this.visibility="visibility_off"
     }
   }
 
@@ -64,6 +66,7 @@ export class RegisterComponent {
         this.usersService.register(this.user).subscribe(
           (res: any) => {
             this.isLoading = false;
+            if(res.isRegistered== true)this.user={ email: '', password: '', username: '', rol: '', auth: false, authCode: '', speciality: '', hSpeciality: '' };
           },
           (err) => {
             this.isLoading = false;

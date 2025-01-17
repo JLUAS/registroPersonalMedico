@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from 'express';
+
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthenticateUser, UserLogin, UserRegister } from '../models/User';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class UsersService {
   // private apiUrl = 'http://localhost:3030';
   private apiUrl = 'https://humorous-oryx-ace.ngrok-free.app';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   hasTokenAdmin(): boolean {
     const token = localStorage.getItem('token');
@@ -57,5 +58,10 @@ export class UsersService {
 
   authenticateUser(user:AuthenticateUser): Observable<any> {
     return this.http.post(`${this.apiUrl}/authenticateUser`, user);
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['']);
   }
 }
