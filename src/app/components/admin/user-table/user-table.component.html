@@ -1,0 +1,112 @@
+<div *ngIf="isAdmin" class="my-10">
+  <table class="min-w-full border-collapse border border-gray-300">
+    <thead class="bg-gray-200">
+      <tr>
+        <th class="border border-gray-300 px-4 py-2 text-left">Username</th>
+        <th class="border border-gray-300 px-4 py-2 text-left">Email</th>
+        <th class="border border-gray-300 px-4 py-2 text-left">Rol</th>
+        <th class="border border-gray-300 px-4 py-2 text-left">Editar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of paginatedData" class="even:bg-gray-50">
+        <td class="border border-gray-300 px-4 py-2">{{ user.username }}</td>
+        <td class="border border-gray-300 px-4 py-2">{{ user.email }}</td>
+        <td class="border border-gray-300 px-4 py-2">{{ user.rol}}</td>
+        <td class="border border-gray-300 px-4 py-2 flex align-middle justify-center hover:cursor-pointer group" (click)="editModal(user)"><mat-icon class="group-hover:text-orangeHover">edit</mat-icon></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="flex justify-end items-center mt-4 ">
+    <button
+      class="flex align-middle px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
+      (click)="prevPage()"
+      [disabled]="currentPage === 1"
+    >
+      <mat-icon>navigate_before</mat-icon>
+    </button>
+    <div class="px-2">Página {{ currentPage }} de {{ totalPages }}</div>
+    <button
+      class="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 align-middle flex"
+      (click)="nextPage()"
+      [disabled]="currentPage === totalPages"
+    >
+    <mat-icon>navigate_next</mat-icon>
+    </button>
+  </div>
+</div>
+
+<div
+*ngIf="isEditModal&& isAdmin && editUser"
+  class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50"
+>
+  <div class="bg-white p-6 rounded-lg shadow-lg w-11/12 md:w-1/2 lg:w-1/3">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Editar Usuario</h2>
+
+    <form #editUserForm="ngForm" (ngSubmit)="saveUserChanges(editUserForm)">
+      <!-- Nombre -->
+      <div class="mb-4">
+        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nombre:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-orange focus:border-orange"
+          [(ngModel)]="editUser.username"
+          required
+        />
+      </div>
+
+      <!-- Email -->
+      <div class="mb-4">
+        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-orange focus:border-orange"
+          [(ngModel)]="editUser.email"
+          required
+        />
+      </div>
+
+      <!-- Rol -->
+      <div class="mb-4">
+        <label for="role" class="block text-sm font-medium text-gray-700 mb-1">Rol:</label>
+        <select
+          id="role"
+          name="role"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-orange focus:border-orange"
+          [(ngModel)]="editUser.rol"
+          required
+        >
+          <option value="user">Usuario</option>
+          <option value="admin">Administrador</option>
+        </select>
+      </div>
+
+      <!-- Botones de acción -->
+      <div class="flex flex-col justify-end space-x-2">
+        <div class="flex flex-row justify-end">
+          <button
+            type="button"
+            class="px-4 py-2 rounded-md border-2 duration-300 border-gray-300 text-gray-700 bg-white hover:bg-gray-100 focus:outline-none"
+            (click)="closeEditModal()"
+          >
+            Cancelar
+          </button>
+          <button
+            type="submit"
+            class="px-4 py-2 rounded-md border-2 duration-300 bg-orange text-white hover:bg-orangeHover focus:outline-none mx-2"
+          >
+            Guardar
+          </button>
+        </div>
+        <div *ngIf="errorMessage" class="text-red-500">
+          {{ errorMessage }}
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

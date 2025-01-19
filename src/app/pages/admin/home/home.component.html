@@ -1,4 +1,4 @@
-<section *ngIf="!isAuth && isTimeoutPassed" class="bg-eblack">
+<section *ngIf="!isAuth" class="bg-eblack">
   <div class="flex items-center justify-center h-screen">
     <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 mx-auto bg-bone2 py-5 px-10 rounded-md">
       <form class="flex flex-col">
@@ -16,8 +16,8 @@
     </div>
   </div>
 </section>
-<main class="flex flex-row" *ngIf="isAuth">
+<main class="flex flex-row" *ngIf="!isTimeoutPassed">
   <app-nav class="w-[15%]"></app-nav>
-  <app-register></app-register>
+  <app-register class="w-[85%]"></app-register>
 </main>
 

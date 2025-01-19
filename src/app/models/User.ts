@@ -18,3 +18,12 @@ export interface UserRegister{
   speciality: string
   hSpeciality: string
 }
+
+export interface UserTable{
+  email: string
+  username: string
+  rol: string
+  auth: boolean
+  speciality: string
+  hSpeciality: string
+}

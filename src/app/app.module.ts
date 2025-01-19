@@ -16,7 +16,9 @@ import { HomeComponentUser } from './pages/user/home/home.component';
 import { AuthGuardUserService } from './services/auth-guard-user.service';
 import { UserNavComponent } from './components/user/user-nav/user-nav.component';
 import {MatIconModule} from '@angular/material/icon';
-import { UsersComponent } from './pages/admin/users/users.component'
+import { UsersComponent } from './pages/admin/users/users.component';
+import { UserTableComponent } from './components/admin/user-table/user-table.component';
+import { AddUserComponent } from './components/admin/add-user/add-user.component'
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { UsersComponent } from './pages/admin/users/users.component'
     HomeComponent,
     HomeComponentUser,
     UserNavComponent,
-    UsersComponent
+    UsersComponent,
+    UserTableComponent,
+    AddUserComponent
   ],
   imports: [
     BrowserModule,

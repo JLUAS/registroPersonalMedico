@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { BehaviorSubject, Observable } from 'rxjs';
-import { AuthenticateUser, UserLogin, UserRegister } from '../models/User';
+import { AuthenticateUser, UserLogin, UserRegister, UserTable } from '../models/User';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 })
 export class UsersService {
 
-  // private apiUrl = 'http://localhost:3030';
-  private apiUrl = 'https://humorous-oryx-ace.ngrok-free.app';
+  private apiUrl = 'http://localhost:3030';
+  // private apiUrl = 'https://humorous-oryx-ace.ngrok-free.app';
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -21,7 +21,6 @@ export class UsersService {
 
     try {
       const rol = localStorage.getItem('rol');
-      console.log("rol usersService",  rol)
       return rol === 'admin';
     } catch (error) {
       console.error('Error decoding token:', error);
@@ -34,7 +33,6 @@ export class UsersService {
     if (!token) return false;
     try {
       const rol = localStorage.getItem('rol');
-      console.log("rol usersService",  rol)
       return rol === 'user';
     } catch (error) {
       console.error('Error decoding token:', error);
@@ -47,7 +45,7 @@ export class UsersService {
   }
 
   register(user: UserRegister): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, user);
+    return this.http.post(`${this.apiUrl}/admin/register`, user);
   }
 
   isAuthenticated(email:string): Observable<any> {
@@ -58,6 +56,23 @@ export class UsersService {
 
   authenticateUser(user:AuthenticateUser): Observable<any> {
     return this.http.post(`${this.apiUrl}/authenticateUser`, user);
+  }
+
+  sendEmail(user:AuthenticateUser): Observable<any> {
+    return this.http.post(`${this.apiUrl}/admin/send-email`, user);
+  }
+
+  getUsers():Observable<any>{
+    const data:any=[]
+    if(this.hasTokenAdmin()===true){
+      return this.http.get(`${this.apiUrl}/admin/getUsers`);
+    }else{
+      return data
+    }
+  }
+
+  editUser(user:UserTable): Observable<any> {
+    return this.http.post(`${this.apiUrl}/admin/editUser`, user);
   }
 
   logout() {

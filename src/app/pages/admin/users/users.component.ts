@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticateUser } from '../../../models/User';
 import { UsersService } from '../../../services/users.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -8,7 +9,7 @@ import { UsersService } from '../../../services/users.service';
   styleUrl: './users.component.css'
 })
 export class UsersComponent implements OnInit{
-  constructor(private usersService: UsersService){ }
+  constructor(private usersService: UsersService, private router:Router){ }
   authenticateUser:AuthenticateUser= {email:'', authCode:''}
   isAuth:boolean=false
   isTimeoutPassed:boolean=false
@@ -33,7 +34,13 @@ export class UsersComponent implements OnInit{
       }
     )
     setTimeout(() => {
-      if(!this.isAuth)this.isTimeoutPassed = false;
+      if(!this.isAuth){
+        this.isTimeoutPassed = false;
+        this.router.navigate(['/dashboard'])
+      }
+      if(this.isAuth){
+        this.isTimeoutPassed=true
+      }
     }, 100);
   }
 }
