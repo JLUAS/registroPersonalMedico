@@ -22,26 +22,14 @@
         </div>
 
         <div class=" py-3 mx-auto flex flex-col w-full">
-          <label class="font-bold text-xl" for="username">Nombre completo</label>
-          <input class="border-2 border-eblack rounded-md p-2 mt-2 focus:outline-none focus:border-orangeHover" type="text" placeholder="Nombre completo" [(ngModel)]="user.username" name="username" id="username" required>
-        </div>
-
-        <div class=" py-3 mx-auto flex flex-col w-full">
           <label class="font-bold text-xl" for="role">Rol</label>
           <select class="border-2 border-eblack rounded-md p-2 mt-2 focus:outline-none focus:border-orangeHover" [(ngModel)]="user.rol" name="role" id="role" required>
             <option value="" disabled selected>Selecciona un rol</option>
             <option value="admin">Administrador</option>
+            <option value="leader">Lider</option>
             <option value="user">Personal de la salud</option>
+            <option value="root">Root</option>
           </select>
-        </div>
-
-        <div class=" py-3 pb-5 mx-auto flex flex-col w-full">
-          <label class="font-bold text-xl" for="password">Contraseña</label>
-          <div class="flex flex-row justify-between w-full items-center">
-            <input class="border-2 w-4/5 border-eblack rounded-md p-2 mt-2 focus:outline-none focus:border-orangeHover" [type]="passwordToggle" placeholder="Contraseña" [(ngModel)]="user.password" name="password" id="password" required autocomplete>
-            <mat-icon class="mx-auto w-1/5"  (click)="togglePassword()">{{visibility}}</mat-icon>
-          </div>
-          <p class="text-red-700 text-sm" *ngIf="errPassword">{{errMessage}}</p>
         </div>
       </div>
       <div class="flex flex-col justify-end">

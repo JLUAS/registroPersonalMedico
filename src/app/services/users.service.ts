@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { BehaviorSubject, Observable } from 'rxjs';
-import { AuthenticateUser, UserLogin, UserRegister, UserTable } from '../models/User';
+import { AuthenticateUser, UserLogin, UserRegister, UserTable, UserTableEdit } from '../models/User';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -49,8 +49,6 @@ export class UsersService {
   }
 
   isAuthenticated(email:string): Observable<any> {
-    console.log("ENTRO SERVICIO")
-    console.log("Email servicio",email)
     return this.http.post(`${this.apiUrl}/isAuthenticated`, {email});
   }
 
@@ -74,6 +72,13 @@ export class UsersService {
   editUser(user:UserTable): Observable<any> {
     return this.http.post(`${this.apiUrl}/admin/editUser`, user);
   }
+
+  deleteUser(user: UserTable): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/admin/deleteUser`, {
+        body: user
+    });
+  }
+
 
   logout() {
     localStorage.removeItem('token');

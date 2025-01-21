@@ -7,7 +7,6 @@ import { LoginComponent } from './pages/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { RegisterComponent } from './components/register/register.component';
 import { UsersService } from './services/users.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { NavComponent } from './components/admin/nav/nav.component';
@@ -18,21 +17,25 @@ import { UserNavComponent } from './components/user/user-nav/user-nav.component'
 import {MatIconModule} from '@angular/material/icon';
 import { UsersComponent } from './pages/admin/users/users.component';
 import { UserTableComponent } from './components/admin/user-table/user-table.component';
-import { AddUserComponent } from './components/admin/add-user/add-user.component'
-
+import { AddUserComponent } from './components/admin/add-user/add-user.component';
+import { InformacionComponent } from './components/user/informacion/informacion.component';
+import { DocumentosComponent } from './pages/user/documentos/documentos.component';
+import { LeaderComponent } from './pages/leader/leader.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent,
     NavComponent,
     HomeComponent,
     HomeComponentUser,
     UserNavComponent,
     UsersComponent,
     UserTableComponent,
-    AddUserComponent
+    AddUserComponent,
+    InformacionComponent,
+    DocumentosComponent,
+    LeaderComponent
   ],
   imports: [
     BrowserModule,

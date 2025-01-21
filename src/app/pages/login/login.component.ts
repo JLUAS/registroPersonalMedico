@@ -12,7 +12,7 @@ export class LoginComponent {
 
   constructor(private usersService:UsersService, private router: Router){}
 
-  user:UserLogin = {email:'', password:''}
+  user:UserLogin = {id: 0, email:'', password:''}
   errMessage:string = ""
   errPassword:boolean = false
   errGeneral:boolean = false

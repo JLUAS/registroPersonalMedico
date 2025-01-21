@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../../services/users.service';
-import { UserTable } from '../../../models/User';
+import { UserTable, UserTableEdit } from '../../../models/User';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -11,16 +11,22 @@ import { NgForm } from '@angular/forms';
 export class UserTableComponent implements OnInit {
   users: UserTable[] = [];
   paginatedData: UserTable[] = [];
-  editUser: UserTable | null = null; // Usuario que se está editando
+  editUser: UserTableEdit | null = null; // Usuario que se está editando
+  editedUser: UserTable | null = null; // Usuario que se editado
+  deleteUser: UserTable | null = null; // Usuario que se está editando
   isAdmin: boolean = false;
   isEditModal: boolean = false;
+  isDeleteModal: boolean = false;
   currentPage: number = 1;
   pageSize: number = 5;
   totalPages: number = 1;
   isLoading: boolean = false;
   errorMessage: string | null = null;
 
-  constructor(private usersService: UsersService) {}
+
+  constructor(private usersService: UsersService) {
+  }
+
 
   ngOnInit(): void {
     this.isAdmin = this.usersService.hasTokenAdmin();
@@ -80,13 +86,24 @@ export class UserTableComponent implements OnInit {
     this.isEditModal = true;
   }
 
+  deleteModal(user: UserTable): void {
+    this.deleteUser = { ...user }; // Copiar los datos del usuario a editar
+    this.isDeleteModal = true;
+  }
+
   closeEditModal(): void {
     this.isEditModal = false;
-    this.editUser = null; // Limpiar datos del usuario en edición
+    this.deleteUser = null; // Limpiar datos del usuario en edición
+  }
+
+  closeDeleteModal(): void {
+    this.isDeleteModal = false;
+    this.deleteUser = null; // Limpiar datos del usuario en edición
   }
 
   saveUserChanges(form: NgForm): void {
-    if (this.editUser && this.editUser.username.length>=8) {
+    if (this.editUser) {
+      console.log(this.editUser)
       this.usersService.editUser(this.editUser).subscribe(
         (response) => {
           console.log('Usuario actualizado:', response);
@@ -98,8 +115,32 @@ export class UserTableComponent implements OnInit {
           this.errorMessage = 'No se pudo actualizar el usuario.';
         }
       );
+    } else {
+      this.errorMessage = 'No se pudo actualizar el usuario, datos no válidos.';
+    }
+  }
+
+  deleteUserChange(form: NgForm): void {
+    if (this.deleteUser) {
+      this.usersService.deleteUser(this.deleteUser).subscribe(
+        (response) => {
+          console.error('Error al eliminar usuario:', response);
+          this.errorMessage = 'No se pudo eliminar el usuario.';
+        },
+        (error) => {
+          this.closeEditModal();
+          this.loadUsers();
+        }
+      );
     }else{
-      this.errorMessage = 'No se pudo actualizar el usuario, datos no validos.';
+      this.errorMessage = 'No se pudo eliminar el usuario, datos no validos.';
+    }
+  }
+
+  // Manejo del cambio de estado desde el select
+  onStatusChange(value: string): void {
+    if (this.editUser) {
+      this.editUser.status = value === 'Activo';
     }
   }
 }

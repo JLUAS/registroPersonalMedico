@@ -34,8 +34,8 @@ export class HomeComponentUser  implements OnInit{
       }
     )
     setTimeout(() => {
-      this.isTimeoutPassed = true;
-    }, 1000);
+      if(!this.isAuth)this.isTimeoutPassed = false;
+    }, 100);
   }
   authenticateUserFun(){
     const storedEmail = localStorage.getItem('email');

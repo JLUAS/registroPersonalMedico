@@ -13,7 +13,7 @@ export class AddUserComponent {
 
     constructor(private usersService: UsersService) {}
 
-    user: UserRegister = { email: '', password: '', username: '', rol: '', auth: false, authCode: '', speciality: '', hSpeciality: '' };
+    user: UserRegister = { email: '', password: '', rol: '', auth: false, authCode: '', speciality: '', hSpeciality: '' };
     errMessage: string = "";
     errPassword: boolean = false;
     errUser: boolean = false;
@@ -44,17 +44,13 @@ export class AddUserComponent {
     }
 
     register() {
-      if (this.user.email != '' && this.user.password != '' && this.user.username != '' && this.user.username != "") {
+      if (this.user.email != '') {
+        this.user.password = this.generateAuthCode();
         if (this.user.password.length < 8) {
           this.errMessage = "La contraseña debe de tener mínimo 8 caracteres";
           this.errPassword = true;
           this.errGeneral = false;
-        } else if (this.user.username.length < 9) {
-          this.errMessage = "Recuerda incluir nombre y ambos apellidos";
-          this.errUser = true;
-          this.errPassword = false;
-          this.errGeneral = false;
-        } else {
+        }else {
           if (this.user.rol == "admin") {
             this.user.speciality = "NA";
             this.user.hSpeciality = "NA";
@@ -77,7 +73,8 @@ export class AddUserComponent {
                 userEmail.email=this.user.email
                 userEmail.authCode=this.user.authCode
                 this.sendEmail(userEmail)
-                this.user={ email: '', password: '', username: '', rol: '', auth: false, authCode: '', speciality: '', hSpeciality: '' };
+                this.user={ email: '', password: '',  rol: '', auth: false, authCode: '', speciality: '', hSpeciality: '' };
+                window.location.reload()
               }
 
             },
