@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthenticateUser } from '../../../models/User';
 import { UsersService } from '../../../services/users.service';
-import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-users-admin',
-  templateUrl: './users.component.html',
-  styleUrl: './users.component.css'
+  selector: 'app-numbers',
+  templateUrl: './numbers.component.html',
+  styleUrl: './numbers.component.css'
 })
-export class UsersComponent implements OnInit{
+export class NumbersComponent implements OnInit{
   constructor(private usersService: UsersService, private router:Router){ }
   authenticateUser:AuthenticateUser= {email:'', authCode:''}
   isAuth:boolean=false

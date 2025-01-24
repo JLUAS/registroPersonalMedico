@@ -9,7 +9,7 @@ export class AuthGuardService implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean|UrlTree {
         if (!this.userService.hasTokenAdmin()) {
-            alert('Por favor registrate para acceder');
+            alert('Por favor registrate para acceder admin');
             this.router.navigate(["/"]);
             return false;
         }

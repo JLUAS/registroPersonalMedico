@@ -10,13 +10,14 @@ export interface AuthenticateUser{
 }
 
 export interface UserRegister{
+  firstName:string,
+  middleName:string,
+  lastName:string,
   email: string
   password: string
   rol: string
-  auth: boolean
+  authenticated: boolean
   authCode: string
-  speciality: string
-  hSpeciality: string
 }
 
 export interface UserTable{

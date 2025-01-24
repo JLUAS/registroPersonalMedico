@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { AuthenticateUser, UserRegister } from '../../../models/User';
+import { UserRegister, AuthenticateUser } from '../../../models/User';
 import { UsersService } from '../../../services/users.service';
 
 @Component({
-  selector: 'app-add-user',
-  templateUrl: './add-user.component.html',
-  styleUrl: './add-user.component.css'
+  selector: 'app-add-number',
+  templateUrl: './add-number.component.html',
+  styleUrl: './add-number.component.css'
 })
-export class AddUserComponent {
+export class AddNumberComponent {
   modal:boolean=false
 
 
@@ -66,7 +66,6 @@ export class AddUserComponent {
                 userEmail.email=this.user.email
                 userEmail.authCode=this.user.authCode
                 this.user={ firstName: '', middleName:'', lastName:'', email: '', password: '', rol: '', authenticated: false, authCode: ''};
-
                 window.location.reload()
               }
 
@@ -84,19 +83,5 @@ export class AddUserComponent {
         this.errGeneral = true;
         this.errMessage = "Llena todos los campos";
       }
-    }
-    sendEmail(userEmail:AuthenticateUser){
-      this.usersService.sendEmail(userEmail).subscribe(
-        (res: any) => {
-          this.isLoading = false;
-          if(res.isEmailSent){
-            this.success== true
-            this.succMessage="Correo de verificacion enviado"
-          }
-        },
-        (err) => {
-          console.error(err);
-        }
-      );
     }
 }

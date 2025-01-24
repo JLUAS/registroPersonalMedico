@@ -13,8 +13,8 @@ export class DocumentsService {
   private apiUrl = 'http://localhost:3030';
   // private apiUrl = 'https://humorous-oryx-ace.ngrok-free.app';
 
-  addDocs(user: any): Observable<any> {
-      return this.http.post(`${this.apiUrl}/user/addUserInfo`, user);
+  addUserGeneralInfo(user: any): Observable<any> {
+      return this.http.post(`${this.apiUrl}/user/addUserGeneralInfo`, user);
   }
 
   getUserInfo(info:any):Observable<any>{

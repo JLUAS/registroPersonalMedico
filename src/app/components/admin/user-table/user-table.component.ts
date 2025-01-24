@@ -15,6 +15,7 @@ export class UserTableComponent implements OnInit {
   editedUser: UserTable | null = null; // Usuario que se editado
   deleteUser: UserTable | null = null; // Usuario que se está editando
   isAdmin: boolean = false;
+  isRoot: boolean = false;
   isEditModal: boolean = false;
   isDeleteModal: boolean = false;
   currentPage: number = 1;
@@ -30,11 +31,8 @@ export class UserTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.isAdmin = this.usersService.hasTokenAdmin();
-    if (this.isAdmin) {
-      this.loadUsers();
-    } else {
-      this.errorMessage = 'No tienes permisos para ver esta información.';
-    }
+    this.isRoot = this.usersService.hasTokenRoot();
+    this.loadUsers()
   }
 
   loadUsers(): void {
@@ -103,12 +101,11 @@ export class UserTableComponent implements OnInit {
 
   saveUserChanges(form: NgForm): void {
     if (this.editUser) {
-      console.log(this.editUser)
       this.usersService.editUser(this.editUser).subscribe(
         (response) => {
-          console.log('Usuario actualizado:', response);
           this.closeEditModal();
           this.loadUsers(); // Refrescar la tabla
+          this.errorMessage=""
         },
         (error) => {
           console.error('Error al actualizar usuario:', error);

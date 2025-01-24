@@ -44,6 +44,7 @@ export class LoginComponent {
             localStorage.setItem('rol', res.rol)
             localStorage.setItem('email', this.user.email)
             if(res.rol== "admin")this.router.navigate(['/dashboard'])
+            if(res.rol== "root")this.router.navigate(['/root/usuarios'])
             if(res.rol=="user")this.router.navigate(['/dashboard/health'])
           },
           (err) => {

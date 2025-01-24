@@ -19,8 +19,20 @@ import { UsersComponent } from './pages/admin/users/users.component';
 import { UserTableComponent } from './components/admin/user-table/user-table.component';
 import { AddUserComponent } from './components/admin/add-user/add-user.component';
 import { InformacionComponent } from './components/user/informacion/informacion.component';
-import { DocumentosComponent } from './pages/user/documentos/documentos.component';
 import { LeaderComponent } from './pages/leader/leader.component';
+import { AuthGuardRootService } from './services/auth-guard-root.service';
+import { UsersRootComponent } from './pages/root/users-root/users-root.component';
+import { RootNavComponent } from './components/root/root-nav/root-nav.component';
+import { GeneralInfoComponent } from './components/user/general-info/general-info.component';
+import { NumbersComponent } from './pages/admin/numbers/numbers.component';
+import { CallsDashboardComponent } from './components/admin/calls-dashboard/calls-dashboard.component';
+import { AuthenticateComponent } from './pages/authenticate/authenticate.component';
+import { StartBotComponent } from './components/admin/start-bot/start-bot.component';
+import { NuevosNumerosComponent } from './components/admin/nuevos-numeros/nuevos-numeros.component';
+import { NumerosContactadosComponent } from './components/admin/numeros-contactados/numeros-contactados.component';
+import { NumerosInaccesiblesComponent } from './components/admin/numeros-inaccesibles/numeros-inaccesibles.component';
+import { AddNumberComponent } from './components/admin/add-number/add-number.component';
+
 
 @NgModule({
   declarations: [
@@ -34,8 +46,19 @@ import { LeaderComponent } from './pages/leader/leader.component';
     UserTableComponent,
     AddUserComponent,
     InformacionComponent,
-    DocumentosComponent,
-    LeaderComponent
+    LeaderComponent,
+    UsersRootComponent,
+    RootNavComponent,
+    GeneralInfoComponent,
+    NumbersComponent,
+    CallsDashboardComponent,
+    AuthenticateComponent,
+    StartBotComponent,
+    NuevosNumerosComponent,
+    NumerosContactadosComponent,
+    NumerosInaccesiblesComponent,
+    AddNumberComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -49,7 +72,8 @@ import { LeaderComponent } from './pages/leader/leader.component';
     provideClientHydration(),
     UsersService,
     AuthGuardService,
-    AuthGuardUserService
+    AuthGuardUserService,
+    AuthGuardRootService
   ],
   bootstrap: [AppComponent]
 })

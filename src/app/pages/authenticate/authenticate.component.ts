@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticateUser } from '../../../models/User';
-import { UsersService } from '../../../services/users.service';
+import { UsersService } from '../../services/users.service';
+import { AuthenticateUser } from '../../models/User';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-home-user',
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  selector: 'app-authenticate',
+  templateUrl: './authenticate.component.html',
+  styleUrl: './authenticate.component.css'
 })
-export class HomeComponentUser  implements OnInit{
-  constructor(private usersService: UsersService){ }
+export class AuthenticateComponent implements OnInit{
   authenticateUser:AuthenticateUser= {email:'', authCode:''}
-  isAuth:boolean=false
-  isTimeoutPassed:boolean=false
-  errMessage:string=""
+  isAuth: boolean | undefined;
+  errMessage: string="";
+  isTimeoutPassed: boolean | undefined;
+  constructor(private usersService:UsersService, private router:Router){}
   ngOnInit(): void {
     const storedEmail = localStorage.getItem('email');
     if (storedEmail) {
@@ -22,7 +23,9 @@ export class HomeComponentUser  implements OnInit{
       (res: any) => {
         if (res.isAuthenticated) {
           this.isAuth = true;
+          this.router.navigate(['/dashboard'])
         } else {
+          this.router.navigate(['/autenticar'])
           this.isAuth = false;
         }
       },
@@ -32,7 +35,7 @@ export class HomeComponentUser  implements OnInit{
     )
     setTimeout(() => {
       if(!this.isAuth)this.isTimeoutPassed = false;
-    }, 100);
+    }, 2000);
   }
   authenticateUserFun(){
     const storedEmail = localStorage.getItem('email');
@@ -43,6 +46,7 @@ export class HomeComponentUser  implements OnInit{
       (res: any) => {
         if (res.isAuthenticated) {
           this.isAuth = true;
+          this.router.navigate(['/dashboard'])
         } else {
           this.isAuth = false;
         }

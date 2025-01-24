@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class UsersService {
 
-  private apiUrl = 'http://localhost:3030';
+  private apiUrl = 'http://localhost:3030/users';
   // private apiUrl = 'https://humorous-oryx-ace.ngrok-free.app';
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -22,6 +22,19 @@ export class UsersService {
     try {
       const rol = localStorage.getItem('rol');
       return rol === 'admin';
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return false;
+    }
+  }
+
+  hasTokenRoot(): boolean {
+    const token = localStorage.getItem('token');
+    if (!token) return false;
+
+    try {
+      const rol = localStorage.getItem('rol');
+      return rol === 'root';
     } catch (error) {
       console.error('Error decoding token:', error);
       return false;
@@ -45,7 +58,7 @@ export class UsersService {
   }
 
   register(user: UserRegister): Observable<any> {
-    return this.http.post(`${this.apiUrl}/admin/register`, user);
+    return this.http.post(`${this.apiUrl}/register`, user);
   }
 
   isAuthenticated(email:string): Observable<any> {
@@ -61,20 +74,15 @@ export class UsersService {
   }
 
   getUsers():Observable<any>{
-    const data:any=[]
-    if(this.hasTokenAdmin()===true){
-      return this.http.get(`${this.apiUrl}/admin/getUsers`);
-    }else{
-      return data
-    }
+      return this.http.get(`${this.apiUrl}/getUsers/admin/`);
   }
 
   editUser(user:UserTable): Observable<any> {
-    return this.http.post(`${this.apiUrl}/admin/editUser`, user);
+    return this.http.post(`${this.apiUrl}/editUser/admin`, user);
   }
 
   deleteUser(user: UserTable): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/admin/deleteUser`, {
+    return this.http.delete(`${this.apiUrl}/deleteUser/admin`, {
         body: user
     });
   }
